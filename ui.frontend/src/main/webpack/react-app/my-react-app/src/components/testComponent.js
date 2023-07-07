@@ -9,9 +9,11 @@ import data from './data';
 export default function MyReactComponent() {
   const API_URL = 'http://localhost:4502/content/wknd-muzik/language-masters/en/home-page.model.json';
   const username = 'admin'; /* use the username for local AEM instance */ 
-  const password = 'giN+_#WPh4eCm84'; /* use the password for local AEM instance */ 
+  const password = 'admin'; /* use the password for local AEM instance */ 
   const [aemData, setAemData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [carouselData,setcarouselData]=useState([])
+  const [containerData,setcontainerData]=useState([])
 
   const aemData1 = data;
   let objectsWithText = [];
@@ -26,7 +28,8 @@ export default function MyReactComponent() {
   let headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa(username + ':' + password));
 
-  function carouselFunction(data) {
+  function carouselFunction(data) { 
+    setcarouselData(data)
    return (<CarouselComponent data={data}/>)  
   }
   useEffect(() => {
@@ -47,16 +50,18 @@ export default function MyReactComponent() {
           }
           return acc;
         }, {});
-        
-
-        
+      
 
         containers.forEach(container => {
           if (filteredData.hasOwnProperty(container)) {
-               console.log(`Data under ${container}:`, filteredData[container]);
                if (filteredData[container][":itemsOrder"].includes("carousel")) {
-                const carouselData = filteredData[container][":items"]["carousel"];
+                const carouselData = filteredData[container][":items"]["carousel"];             
                 carouselFunction(carouselData);
+              }
+              if (filteredData[container][":itemsOrder"].includes("container")) {
+                const containerData = filteredData[container][":items"]["container"];
+        
+                setcontainerData(containerData)
               }
           
           }
@@ -77,8 +82,8 @@ export default function MyReactComponent() {
     <div>
       <Main/>
       <div className=''>
-      <CarouselComponent />
-      <MainPage/>
+      <CarouselComponent data={carouselData} />
+      <MainPage data={containerData}/>
       </div>
       <Footer/>
       {/* {console.log('AEM DATA is \n', )} */}

@@ -5,20 +5,20 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './carousel.css';
-import carouselData from './carouseldata';
 
-const jsonData = carouselData;
 
 export default function CarouselComponent(props) {
-  const carousel = jsonData[":items"]["carousel"];
-  const items = jsonData[":items"]["carousel"][":items"];
+  const carouselData=props.data;
+  const carousel = carouselData;
+  const items = carouselData[":items"];
+
 
   const renderCarouselItems = () => {
     const handleImageLoad = (event) => {
       event.target.classList.add('loaded');
     };
 
-    return Object.values(items).map((item, index) => (
+    return items && Object.values(items).map((item, index) => (
       <div key={item.id} className="carousel-item">
         <div className="carousel-content">
           <div className="carousel-title">{item.title}</div>

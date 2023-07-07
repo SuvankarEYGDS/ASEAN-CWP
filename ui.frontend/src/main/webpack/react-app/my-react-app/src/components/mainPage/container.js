@@ -2,6 +2,7 @@ import React from 'react';
 import './container.css';
 
 const Container = ({ itemsOrder, items }) => {
+
   const renderComponent = (component) => {
     switch (component[':type']) {
       case 'wknd-muzik/components/teaser':
@@ -40,7 +41,7 @@ const Container = ({ itemsOrder, items }) => {
 
   return (
     <div className="container">
-      {itemsOrder.map((itemKey) => {
+      {itemsOrder  && itemsOrder.map((itemKey) => {
         const component = items[itemKey];
         if (component) {
           return renderComponent(component);
