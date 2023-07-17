@@ -1,0 +1,15 @@
+.Nav button {
+    display: flex; /* Updated: Use flexbox */
+    align-items: center;
+    padding: 10px;
+    outline: none;
+    border: 2px solid black;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 70ms;
+  }

@@ -1,17 +1,23 @@
 import React from 'react';
 import './container.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const Container = ({ itemsOrder, items }) => {
 
   const renderComponent = (component) => {
     switch (component[':type']) {
       case 'wknd-muzik/components/teaser':
-        return (
-          <div key={component.id} className="teaser">
-            <h3 dangerouslySetInnerHTML={{ __html: component.title }} />
-            <p dangerouslySetInnerHTML={{ __html: component.description }} />
-            {/* Add additional teaser component elements */}
-          </div>
+        return ( 
+            <Card key={component.id} className='teaser boxshadow'>
+                  <Card.Body>
+                    <Card.Title>{component.title}</Card.Title>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: component.description }} >
+                  
+                    </Card.Text>
+                    
+                  </Card.Body>
+            </Card>
         );
       case 'wknd-muzik/components/title':
         return (
@@ -22,16 +28,19 @@ const Container = ({ itemsOrder, items }) => {
         );
       case 'wknd-muzik/components/list':
         return (
-          <div key={component.id} className="list">
-            <ul>
+          <div key={component.id} className='row'>
               {component.items.map((item) => (
-                <li key={item.id}>
-                  <a href={item.path} dangerouslySetInnerHTML={{ __html: item.title }} />
-                  <p dangerouslySetInnerHTML={{ __html: item.description }} />
-                  {/* Add additional list component elements */}
-                </li>
+                <div className='col'>
+                  <Card  key={item.id} className='boxshadow'>
+                  <Card.Body>
+                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Text dangerouslySetInnerHTML={{ __html: item.description }}>
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+                  </Card>
+                  </div>
               ))}
-            </ul>
           </div>
         );
       default:

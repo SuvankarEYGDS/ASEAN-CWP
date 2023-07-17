@@ -1,12 +1,12 @@
-import './App.css';
-import TestComponent from '../src/components/testComponent';
+
+import LayoutComponent from './components/layoutComponent';
 
 const App = () => {
 
 
   return (
     <div>
-      <TestComponent/> 
+      <LayoutComponent/> 
     </div>
   );
 };
